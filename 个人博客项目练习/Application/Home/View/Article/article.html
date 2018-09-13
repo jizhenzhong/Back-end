@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>文章详情</title>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/bootstrap/css/base.css">
+    <link href="//at.alicdn.com/t/font_l8fb5t7tbgt7f1or.css" rel="stylesheet">
+</head>
+<body id="body">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-offset-1 col-sm-10" id="nav">
+            <include file="./Application/Home/View/Common/head.html"/>
+        </div>
+    </div>
+    <div class="row hidden-xs" id="search">
+        <div class="col-sm-offset-1 col-sm-10">
+            <div class="row">
+                <div class="col-sm-1">
+                    <a href=""><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
+                </div>
+                <div class="col-sm-11">
+                    <form class="form-inline" action="{:U('Category/search')}" method="post">
+                        <div class="from-group">
+                            <div class="col-sm-9">
+                                <input type="text" name="searchField" placeholder="请输入文章分类或标题" class="form-control"
+                                       id="search_text">
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="submit" class="form-control" value="搜一下">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid" id="arc_detail">
+    <div class="row">
+        <div class="col-sm-offset-3 col-sm-6">
+            <h3 class="text-center"><strong>{$arcDetail['msg_title']}</strong></h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-offset-2 col-sm-8">
+            <p>{$arcDetail['msg_content']}</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

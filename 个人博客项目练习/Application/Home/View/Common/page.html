@@ -1,0 +1,32 @@
+<nav aria-label="Page navigation" class="text-center">
+    <ul class="pagination">
+        <neq name="p" value="1">
+            <li><a href="{:U($curControl.'?p=1&cat_id='.$curCatId)}">首页</a></li>
+            <else/>
+            <li class="disabled"><a href="#">首页</a></li>
+        </neq>
+        <li>
+            <neq name="p" value="1">
+        <li><a href="{:U($curControl.'?p='.($p-1).'&cat_id='.$curCatId)}">上页</a></li>
+        <else/>
+        <li class="disabled"><a href="javascript:">上页</a></li>
+        </neq>
+        <for start="1" end="$page+1" step="1">
+            <eq name="i" value="$p">
+                <li class="active"><a href="{:U($curControl.'?p='.$i.'&cat_id='.$curCatId)}">{$i}</a></li>
+                <else/>
+                <li><a href="{:U($curControl.'?p='.$i.'&cat_id='.$curCatId)}">{$i}</a></li>
+            </eq>
+        </for>
+        <neq name="p" value="$page">
+            <li><a href="{:U($curControl.'?p='.($p+1).'&cat_id='.$curCatId)}">下页</a></li>
+            <else/>
+            <li class="disabled"><a href="javascript:">下页</a></li>
+        </neq>
+        <neq name="p" value="$page">
+            <li><a href="{:U($curControl.'?p='.$page.'&cat_id='.$curCatId)}">尾页</a></li>
+            <else/>
+            <li class="disabled"><a href="#">尾页</a></li>
+        </neq>
+    </ul>
+</nav>

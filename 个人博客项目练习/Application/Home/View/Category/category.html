@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>分类</title>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/bootstrap/css/base.css">
+    <link href="//at.alicdn.com/t/font_l8fb5t7tbgt7f1or.css" rel="stylesheet">
+</head>
+<body id="body">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-offset-1 col-sm-10" id="nav">
+            <include file="./Application/Home/View/Common/head.html"/>
+        </div>
+    </div>
+    <div class="row hidden-xs" id="search">
+        <div class="col-sm-offset-1 col-sm-10">
+            <div class="row">
+                <div class="col-sm-1">
+                    <a href=""><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
+                </div>
+                <div class="col-sm-11">
+                    <form class="form-inline" action="{:U('Category/search')}" method="post">
+                        <div class="from-group">
+                            <div class="col-sm-9">
+                                <input type="text" name="searchField" placeholder="请输入文章分类或标题" class="form-control"
+                                       id="search_text">
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="submit" class="form-control" value="搜一下">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" id="bar">
+        <div class="col-sm-offset-1 col-sm-10" id="head_img">
+            <div class="row">
+                <div class="col-xs-offset-1 col-xs-4">
+                    <h2>BIGDOG</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-offset-3 ">
+                    <h3>&nbsp;&nbsp;的&nbsp;个&nbsp;人&nbsp;博&nbsp;客</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid" id="main_body">
+    <div class="row">
+        <div class="col-sm-offset-2 col-sm-8" id="arc_body">
+            <volist name="msgList" id="vo">
+                <div class="media">
+                    <div class="media-body">
+                        <h5 class="media-heading"><strong>{$vo.msg_id}. {$vo.msg_title}</strong></h5>
+                        <p>{$vo.msg_content|msubstr=0,162,'utf-8',true}</p>
+                        <div id="arc_icon">
+                            <strong><span
+                                    class="glyphicon glyphicon-time"></span>&nbsp;{$vo.msg_time}</strong>
+                            <neq name="vo.cat_name" value="">
+                                <strong><span
+                                        class="glyphicon glyphicon-tags"></span>&nbsp;{$vo.cat_name}</strong>
+                                <else/>
+                                <strong><span class="glyphicon glyphicon-tags"></span>&nbsp;无</strong>
+                            </neq>
+                            <a href="{:U('Article/view?cat_id='.$curCatId.'&msg_id='.$vo['msg_id'])}" id="arc_more">
+                                <button>更多</button>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="media-right">
+                        <a href="" class="hidden-xs hidden-sm"><img class="media-object img-thumbnail"
+                                                                    src="__ROOT__/{$vo.msg_img}" alt=""></a>
+                    </div>
+                </div>
+            </volist>
+        </div>
+    </div>
+    <div class="row">
+        <include file="./Application/Home/View/Common/page.html"/>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row" id="footer">
+        <div class="col-md-12">
+            <p><strong>本站本站由©BIGDOG 陕ICP备16007407号 </strong></p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

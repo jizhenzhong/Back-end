@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>分类操作</title>
+</head>
+<body>
+<include file="./Application/Admin/View/Common/head.html"/>
+<div class="container">
+    <div class="row">
+        <form action="{$act}" class="form-horizontal" method="post">
+            <div class="form-group">
+                <label class="control-label col-lg-2">分类名:</label>
+                <div class="col-lg-6">
+                    <input type="text" name="cat_name" id="cat_name" class="form-control" value="<notempty name='catInfo'>{$catInfo.cat_name}</notempty>">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-lg-2">所属分类:</label>
+                <div class="col-lg-3">
+                    <select name="parent_id" id="parent_id">
+                        <option value="0">无</option>
+                        <volist name="parentCatInfo" id="vo">
+                                <option value="{$vo.cat_id}">{$vo.cat_name}</option>
+                        </volist>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-lg-10 col-lg-offset-2">
+                    <input type="submit" value="{$actSubmit}" class="btn btn-primary">
+                </div>
+                <input type="hidden" name="cat_id" value="<notempty name='catInfo.cat_id'>{$catInfo.cat_id}</notempty>">
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

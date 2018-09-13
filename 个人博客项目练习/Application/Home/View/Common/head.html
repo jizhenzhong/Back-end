@@ -1,0 +1,71 @@
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/bootstrap/css/bootstrap.css">
+<script src="__PUBLIC__/bootstrap/js/jquery.min.js"></script>
+<script src="__PUBLIC__/bootstrap/js/bootstrap.js"></script>
+
+<nav class="navbar navbar-default">
+    <div class="col-sm-12">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#fold_target">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <img src="__PUBLIC__/Img/my_logo.png" class="img-circle hidden-md hidden-sm nav-brand" alt="">
+        </div>
+        <div class="collapse navbar-collapse text-center" id="fold_target">
+            <ul class="nav navbar-nav">
+                <eq name="curCatId" value="">
+                    <li><a href="{:U('Index/index')}" class="nav_active">首页</a></li>
+                    <else/>
+                    <li><a href="{:U('Index/index')}">首页</a></li>
+                </eq>
+                {//这步超难的二级分类导航的判断流程需要多看看 }
+                <volist name="catList" id="vo">
+                    <for start="0" end="$countChildCat" comparison="lt" step="1" name="i">
+                        <eq name="vo.cat_id" value="$catChildList[$i]['parent_id']">
+                            <li class="dropdown">
+                                <eq name="t" value="$vo.cat_id">
+                                    <a href="#" class="dropdown-toggle nav_active"
+                                       data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        {$vo.cat_name}<span class="caret"></span>
+                                    </a>
+                                    <else/>
+                                    <a href="#" class="dropdown-toggle"
+                                       data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        {$vo.cat_name}<span class="caret"></span>
+                                    </a>
+                                </eq>
+                                <ul class="dropdown-menu" id="dropdown-menu">
+                                    <volist name="catChildList" id="vo2">
+                                        <eq name="vo.cat_id" value="$vo2.parent_id">
+                                            <li class="text-center"><a
+                                                    href="{:U('Category/view?cat_id='.$vo2['cat_id'].'&t='.$vo2['parent_id'])}">{$vo2.cat_name}</a>
+                                            </li>
+                                        </eq>
+                                    </volist>
+                                </ul>
+                            </li>
+                            <assign name="i" value="$countChildCat"/>
+                        </eq>
+                        <if condition="$i eq $countChildCat-1">
+                            <eq name="curCatId" value="$vo.cat_id">
+                                <li><a href="{:U('Category/view?cat_id='.$vo['cat_id'])}" class="nav_active">{$vo.cat_name}</a>
+                                </li>
+                                <else/>
+                                <li><a href="{:U('Category/view?cat_id='.$vo['cat_id'])}">{$vo.cat_name}</a></li>
+                            </eq>
+                        </if>
+                    </for>
+                </volist>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+
+
+
+
+
